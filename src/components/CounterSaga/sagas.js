@@ -1,27 +1,25 @@
 import { put, takeEvery, delay } from "redux-saga/effects";
 
-export function* incrementAsync(data) {
+export function* incrementAsync() {
   yield delay(1000);
-  // yield put({ type: 'INC'})
-  yield put({ type: "INCREMENT", payload: +data });
+  yield put({ type: "INC" });
 }
 
-export function* decrementAsync(data) {
+export function* decrementAsync() {
   yield delay(1000);
-  // yield put({ type: 'DEC'})
-  yield put({ type: "DECREMENT", payload: data });
+  yield put({ type: "DEC" });
 }
 
-export function* getData(data) {
-  if (data < 0 || isNaN(data) === true) {
+export function* getData(action) {
+  if (action.payload < 0 || isNaN(action.payload) === true) {
     yield put({ type: "DATA", payload: 1 });
   } else {
-    yield put({ type: "DATA", payload: data });
+    yield put({ type: "DATA", payload: action.payload });
   }
 }
 
 function* saga() {
-  yield takeEvery("VALIDATTION", getData);
+  yield takeEvery("VALIDATION", getData);
   yield takeEvery("INCREMENT_ASYNC", incrementAsync);
   yield takeEvery("DECREMENT_ASYNC", decrementAsync);
 }

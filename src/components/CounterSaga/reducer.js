@@ -8,21 +8,14 @@ const counterReducer = (state = initialState, { type, payload }) => {
         counter: state.counter + 1
       };
     case "DEC":
-      if (state.counter === 0)
-        return {
-          ...state,
-          counter: (state.counter = 0)
-        };
-      else {
-        return {
-          ...state,
-          counter: state.counter - 1
-        };
-      }
-    case "RESET":
       return {
         ...state,
-        counter: (state.counter = 0)
+        counter: state.counter - 1
+      };
+    case "RESET":
+      return {
+        counter: 0,
+        Data: (state.Data = 0)
       };
     case "DATA":
       return {
@@ -33,38 +26,13 @@ const counterReducer = (state = initialState, { type, payload }) => {
       console.log(payload);
       return {
         ...state,
-        counter: state.counter + Number(payload)
+        counter: Number(state.counter) + Number(+payload)
       };
     case "DECREMENT":
-      if (state.counter === 0) {
-        return {
-          ...state,
-          counter: (state.counter = 0)
-        };
-      } else {
-        return {
-          ...state,
-          counter: state.counter - Number(payload)
-        };
-      }
-    case "INCREMENT_ASYNC":
-      console.log(payload);
       return {
         ...state,
-        counter: state.counter + Number(payload)
+        counter: Number(state.counter) - Number(+payload)
       };
-    case "DECREMENT_ASYNC":
-      if (state.counter === 0) {
-        return {
-          ...state,
-          counter: (state.counter = 0)
-        };
-      } else {
-        return {
-          ...state,
-          counter: state.counter - Number(payload)
-        };
-      }
     default:
       return state;
   }

@@ -8,7 +8,8 @@ import {
   incWithExtra,
   decWithExtra,
   increAcy,
-  decreAcy
+  decreAcy,
+  Valid
 } from "./CounterActions";
 
 function CounterSaga() {
@@ -17,14 +18,14 @@ function CounterSaga() {
   return (
     <>
       <div>
-        <div>Counter-{counter} </div>
+        <div>Counter: {counter} </div>
         <input
           type="text"
           id="counter"
           name="counter"
-          value={Data}
+          // value={Data}
           onChange={(e) => {
-            e.target.value && dispatch(getData(+e.target.value));
+            e.target.value && dispatch(Valid(e.target.value));
           }}
         />
         <br />

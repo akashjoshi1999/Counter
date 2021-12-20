@@ -21,6 +21,11 @@ function Home() {
       <br />
       <a href="/counterthunk">CounterThunk</a>
       <br />
+      <a href="/dogimage">Dog image fetch</a>
+      <br />
+      <br />
+      to see the details of above link unhide its store link from index.js and
+      hide other store line
     </div>
   );
 }

@@ -15,19 +15,19 @@ export const getData = (data) => {
 };
 
 export const incWithExtra = (data) => {
-  return { type: "INCREMENT", payload: +data };
+  return { type: "INCREMENT", payload: data };
 };
 
 export const decWithExtra = (data) => {
   return { type: "DECREMENT", payload: data };
 };
 
-export const increAcy = (data) => {
-  return { type: "INCREMENT_ASYNC", payload: data };
+export const increAcy = () => {
+  return { type: "INCREMENT_ASYNC" };
 };
 
-export const decreAcy = (data) => {
-  return { type: "DECREMENT_ASYNC", payload: data };
+export const decreAcy = () => {
+  return { type: "DECREMENT_ASYNC" };
 };
 
 export const Valid = (data) => {

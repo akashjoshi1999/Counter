@@ -9,6 +9,7 @@ import PostThunk from "./components/PostWithThunk/PostThunk";
 import PostSaga from "./components/PostWithSaga/PostSaga";
 import CounterSaga from "./components/CounterSaga/CounterSaga";
 import CounterThunk from "./components/CounterThunk/CounterThunk";
+import DogImage from "./components/DogImage/Dogimage";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path="/postsaga" element={<PostSaga />} />
           <Route path="/countersaga" element={<CounterSaga />} />
           <Route path="/counterthunk" element={<CounterThunk />} />
+          <Route path="/dogimage" element={<DogImage />} />
         </Routes>
       </BrowserRouter>
     </div>
