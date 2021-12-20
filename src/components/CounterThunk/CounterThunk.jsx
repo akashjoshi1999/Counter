@@ -20,7 +20,6 @@ function CounterThunk() {
           type="text"
           id="counter"
           name="counter"
-          value={Data}
           onChange={(e) => {
             e.target.value && dispatch(getData(e.target.value));
           }}

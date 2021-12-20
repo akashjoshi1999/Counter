@@ -24,8 +24,10 @@ function Home() {
       <a href="/dogimage">Dog image fetch</a>
       <br />
       <br />
-      to see the details of above link unhide its store link from index.js and
+      To see the details of above link unhide its store link from index.js and
       hide other store line
+      <br />
+      Open it in sandBox
     </div>
   );
 }
