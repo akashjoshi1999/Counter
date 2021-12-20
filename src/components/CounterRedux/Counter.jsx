@@ -16,7 +16,7 @@ function Counter() {
   return (
     <>
       <div>
-        <div>Counter-{counter} </div>
+        <div>Counter: {counter} </div>
         <input
           type="text"
           id="counter"
@@ -41,6 +41,9 @@ function Counter() {
         </button>
         <br />
         <button onClick={() => dispatch(reset())}>reset</button>
+        <br />
+        <br />
+        <a href="/">Back</a>
       </div>
     </>
   );

@@ -89,6 +89,9 @@ export default function CounterReducer() {
         </button>
         <br />
         <button onClick={() => dispatch({ type: "RESET" })}>reset</button>
+        <br />
+        <br />
+        <a href="/">Back</a>
       </div>
     </>
   );

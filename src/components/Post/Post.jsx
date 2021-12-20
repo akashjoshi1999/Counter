@@ -18,6 +18,7 @@ function useUpdate(initialValue) {
 
 const Post = () => {
   const [post, setPost] = useUpdate();
+  const [error, setError] = useUpdate(null);
   const [show, setShow] = useUpdate(true);
   const [state, dispatch] = useReducer(reducer, initialValue);
   const [id, setId] = useUpdate(true);
@@ -27,15 +28,19 @@ const Post = () => {
   }, []);
 
   const getData = async () => {
-    await Axios.get("http://localhost:3010/posts").then((response) => {
-      if (response.data) {
-        dispatch({
-          type: "FETCH_SUCCESS",
-          payload: response.data
-        });
-        setPost(response.data);
-      }
-    });
+    await Axios.get("http://localhost:3010/posts")
+      .then((response) => {
+        if (response.data) {
+          dispatch({
+            type: "FETCH_SUCCESS",
+            payload: response.data
+          });
+          setPost(response.data);
+        }
+      })
+      .catch((error) => {
+        setError(error);
+      });
   };
 
   const handleChangeFor = (input, e) => {
@@ -107,98 +112,107 @@ const Post = () => {
     });
   };
 
-  return (
-    <>
+  if (error) {
+    return (
       <div>
-        <form>
-          <div className="form-group">
-            <div className="row">
-              <div className="col-md-6">
-                <label>Enter title</label>
-                <input
-                  type="text"
-                  size="150"
-                  value={state["title"]}
-                  required
-                  onChange={(e) => dispatch(handleChangeFor("title", e))}
-                  className="form-control"
-                  name="exampleInputEmail1"
-                  placeholder="Enter Name"
-                />
-              </div>
-              <div className="col-md-6">
-                <label>Enter body</label>
-                <input
-                  type="text"
-                  value={state["body"]}
-                  required
-                  onChange={(e) => dispatch(handleChangeFor("body", e))}
-                  className="form-control"
-                  name="exampleInputEmail1"
-                  placeholder="Enter username"
-                />
+        Error: {error.message}
+        <a href="/">back</a>
+      </div>
+    );
+  } else {
+    return (
+      <>
+        <div>
+          <form>
+            <div className="form-group">
+              <div className="row">
+                <div className="col-md-6">
+                  <label>Enter title</label>
+                  <input
+                    type="text"
+                    size="150"
+                    value={state["title"]}
+                    required
+                    onChange={(e) => dispatch(handleChangeFor("title", e))}
+                    className="form-control"
+                    name="exampleInputEmail1"
+                    placeholder="Enter Name"
+                  />
+                </div>
+                <div className="col-md-6">
+                  <label>Enter body</label>
+                  <input
+                    type="text"
+                    value={state["body"]}
+                    required
+                    onChange={(e) => dispatch(handleChangeFor("body", e))}
+                    className="form-control"
+                    name="exampleInputEmail1"
+                    placeholder="Enter username"
+                  />
+                </div>
               </div>
             </div>
-          </div>
-          {show ? (
-            <button
-              type="submit"
-              className="btn btn-primary"
-              onClick={submitHanlder}
-            >
-              Submit
-            </button>
-          ) : (
-            <button
-              type="submit"
-              className="btn btn-primary"
-              onClick={editPosts}
-            >
-              Edit
-            </button>
-          )}
-        </form>
-      </div>
-      <div>
-        <table className="content-table">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>TITLE</th>
-              <th>BODY</th>
-              <th>DELETE</th>
-              <th>EDIT</th>
-            </tr>
-          </thead>
-          <tbody>
-            {post &&
-              post.map((item, index) => {
-                return (
-                  <tr key={index}>
-                    <td>{index + 1}</td>
-                    <td>{item.title}</td>
-                    <td>{item.body}</td>
-                    <td>
-                      <button onClick={() => onDelete(item.id)}>
-                        ❌ &nbsp;
-                      </button>
-                    </td>
-                    <td>
-                      <button
-                        className="primary"
-                        onClick={() => onEdit(item.id)}
-                      >
-                        Edit &nbsp;
-                      </button>
-                    </td>
-                  </tr>
-                );
-              })}
-          </tbody>
-        </table>
-      </div>
-    </>
-  );
+            {show ? (
+              <button
+                type="submit"
+                className="btn btn-primary"
+                onClick={submitHanlder}
+              >
+                Submit
+              </button>
+            ) : (
+              <button
+                type="submit"
+                className="btn btn-primary"
+                onClick={editPosts}
+              >
+                Edit
+              </button>
+            )}
+          </form>
+        </div>
+        <div>
+          <table className="content-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>TITLE</th>
+                <th>BODY</th>
+                <th>DELETE</th>
+                <th>EDIT</th>
+              </tr>
+            </thead>
+            <tbody>
+              {post &&
+                post.map((item, index) => {
+                  return (
+                    <tr key={index}>
+                      <td>{index + 1}</td>
+                      <td>{item.title}</td>
+                      <td>{item.body}</td>
+                      <td>
+                        <button onClick={() => onDelete(item.id)}>
+                          ❌ &nbsp;
+                        </button>
+                      </td>
+                      <td>
+                        <button
+                          className="primary"
+                          onClick={() => onEdit(item.id)}
+                        >
+                          Edit &nbsp;
+                        </button>
+                      </td>
+                    </tr>
+                  );
+                })}
+            </tbody>
+          </table>
+        </div>
+      </>
+    );
+  }
 };
 
 export default Post;
