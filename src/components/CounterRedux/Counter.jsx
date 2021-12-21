@@ -10,43 +10,51 @@ import {
 } from "./actions";
 
 function Counter() {
-  const { counter, Data } = useSelector((state) => state.counter);
-  const dispatch = useDispatch();
-
-  return (
-    <>
+  if (useSelector((state) => state.counter) === undefined) {
+    return (
       <div>
-        <div>Counter: {counter} </div>
-        <input
-          type="text"
-          id="counter"
-          name="counter"
-          value={Data}
-          onChange={(e) => {
-            dispatch(getData(e.target.value));
-          }}
-        />
-        <br />
-        <button onClick={() => dispatch(inc())}>Inc</button>
-        <br />
-        <button onClick={() => dispatch(incWithExtra(Data))}>
-          Inc with value
-        </button>
-        <br />
-
-        <button onClick={() => dispatch(dec())}>Dec</button>
-        <br />
-        <button onClick={() => dispatch(decWithExtra(Data))}>
-          Dec with value
-        </button>
-        <br />
-        <button onClick={() => dispatch(reset())}>reset</button>
-        <br />
-        <br />
-        <a href="/">Back</a>
+        <a href="/">back</a>
       </div>
-    </>
-  );
+    );
+  } else {
+    const { counter, Data } = useSelector((state) => state.counter);
+    const dispatch = useDispatch();
+
+    return (
+      <>
+        <div>
+          <div>Counter: {counter} </div>
+          <input
+            type="text"
+            id="counter"
+            name="counter"
+            value={Data}
+            onChange={(e) => {
+              dispatch(getData(e.target.value));
+            }}
+          />
+          <br />
+          <button onClick={() => dispatch(inc())}>Inc</button>
+          <br />
+          <button onClick={() => dispatch(incWithExtra(Data))}>
+            Inc with value
+          </button>
+          <br />
+
+          <button onClick={() => dispatch(dec())}>Dec</button>
+          <br />
+          <button onClick={() => dispatch(decWithExtra(Data))}>
+            Dec with value
+          </button>
+          <br />
+          <button onClick={() => dispatch(reset())}>reset</button>
+          <br />
+          <br />
+          <a href="/">Back</a>
+        </div>
+      </>
+    );
+  }
 }
 
 export default Counter;
