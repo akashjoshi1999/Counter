@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getData } from "./postAction";
 
 const PostThunk = () => {
-  if (useSelector((state) => state.post.post) === undefined) {
+  if (useSelector((state) => state.post) === undefined) {
     return (
       <div>
         <a href="/">back</a>

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getData } from "./postAction";
 
 const PostSaga = () => {
-  if (useSelector((state) => state.postReducer.post) === undefined) {
+  if (useSelector((state) => state.postReducer) === undefined) {
     return (
       <div>
         <a href="/">back</a>
