@@ -27,8 +27,7 @@ function Counter() {
           <input
             type="text"
             id="counter"
-            name="counter"
-            value={Data}
+            name="counter"            
             onChange={(e) => {
               dispatch(getData(e.target.value));
             }}
